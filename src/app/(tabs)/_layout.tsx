@@ -3,7 +3,7 @@ import { NativeTabs } from "expo-router/unstable-native-tabs";
 
 export default function TabsLayout() {
   const path = usePathname();
-  console.log("Current Path:", path);
+  // console.log("Current Path:", path);
 
   return (
     <NativeTabs hidden={path !== "/"}>

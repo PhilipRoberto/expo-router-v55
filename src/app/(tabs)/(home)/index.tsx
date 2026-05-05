@@ -4,6 +4,29 @@ import { Button, StyleSheet, Text, View } from "react-native";
 export default function Index() {
   const router = useRouter();
 
+  async function hitApi() {
+    const response = await fetch("/api/hello");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+  }
+  async function hitWorldApi() {
+    const response = await fetch("/api/world", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({ name: "World" }),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    console.log(data);
+  }
+
   return (
     <>
       <Stack.Screen
@@ -25,6 +48,11 @@ export default function Index() {
           Go to explore screen
         </Text>
         <Button title="Generation" onPress={() => router.push("/generation")} />
+        {/* @ts-ignore */}
+        <Button title="Clear" onPress={() => router.push("/clear")} />
+
+        <Button title="Hit API" onPress={hitApi} />
+        <Button title="Hit World API" onPress={hitWorldApi} />
       </View>
     </>
   );
